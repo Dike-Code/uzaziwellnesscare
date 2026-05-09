@@ -1412,6 +1412,7 @@ section {
 	object-position: center 30%;
 	display: block;
 }
+
 @media (max-width: 768px) {
 	.banner-photo {
 		aspect-ratio: 4/3;
@@ -1703,6 +1704,7 @@ section {
 	color: var(--ink);
 	font-weight: 500;
 }
+
 @media (max-width: 768px) {
 	.service-area-band {
 		grid-template-columns: 1fr;
