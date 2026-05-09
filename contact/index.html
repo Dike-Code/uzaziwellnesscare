@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Uzazi Wellness Care</title>
+<meta name="description" content="Get in touch with Uzazi Wellness Care. Send a message or book a free 30-minute consultation." />
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-64.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon-180.png" />
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<div class="top-banner">
+  🌿 Now welcoming new clients — <a href="../contact/index.html">Book your complimentary first consultation →</a>
+</div>
+<header class="site-header">
+  <div class="container nav">
+    <a href="../index.html" class="brand" aria-label="Uzazi Wellness Care home"><img src="../assets/logo-full.png" alt="Uzazi Wellness Care" class="brand-logo brand-logo-light" /><img src="../assets/logo-full-light.png" alt="" class="brand-logo brand-logo-dark" aria-hidden="true" /></a>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="../index.html" >Home</a></li>
+      <li><a href="../about/index.html" >About Us</a></li>
+      <li><a href="../services/index.html" >Services</a></li>
+      <li><a href="../care-packages/index.html" >Care Packages</a></li>
+      <li><a href="../mamas-corner/index.html" >Mama's Corner</a></li>
+      <li><a href="../contact/index.html" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="../contact/index.html" class="btn btn-primary nav-book">Book Consultation</a>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="../index.html">Home</a> &nbsp;/&nbsp; Contact</div>
+    <span class="eyebrow">Get In Touch</span>
+    <h1>Let's start with a conversation</h1>
+    <p>Send a message and we'll respond within one business day. Or book a free 30-minute consultation directly.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container two-col" style="align-items:flex-start;">
+    <div class="reveal">
+      <h2>Send a message</h2>
+      <p>Tell us a little about where you are in your journey and what kind of support you're hoping for. No detail too small.</p>
+      <form class="form-grid mt-2" action="mailto:info@uzaziwellnesscare.com" method="post" enctype="text/plain" onsubmit="setTimeout(()=>{document.getElementById('contact-success').style.display='block'; this.style.display='none';}, 200);">
+        <div class="form-row">
+          <div class="field"><label for="c-name">Your name</label><input id="c-name" type="text" required></div>
+          <div class="field"><label for="c-email">Email address</label><input id="c-email" type="email" required></div>
+        </div>
+        <div class="field">
+          <label for="c-stage">Where are you in your journey?</label>
+          <select id="c-stage">
+            <option>Planning to conceive</option>
+            <option>Pregnant — first trimester</option>
+            <option>Pregnant — second trimester</option>
+            <option>Pregnant — third trimester</option>
+            <option>Just gave birth</option>
+            <option>In the fourth trimester</option>
+            <option>Past the fourth trimester</option>
+            <option>I'm a partner / family member</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="c-interest">What are you most interested in?</label>
+          <select id="c-interest">
+            <option>A free consultation</option>
+            <option>Prenatal care</option>
+            <option>Birth preparation</option>
+            <option>Postnatal recovery</option>
+            <option>Infant feeding &amp; lactation</option>
+            <option>Mental health support</option>
+            <option>Maternal nutrition</option>
+            <option>A care package</option>
+            <option>I'm not sure yet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="c-msg">Your message (optional)</label>
+          <textarea id="c-msg" placeholder="Tell us a little more if you'd like..."></textarea>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </div>
+      </form>
+      <div id="contact-success" style="display:none; margin-top:1rem; padding:1.5rem; background:var(--color-bg-alt); border-radius:var(--radius-lg); border-left:3px solid var(--color-accent);">
+        <strong style="color:var(--color-primary);">Thank you — your message is on its way.</strong>
+        <p style="margin:0.5rem 0 0; color:var(--color-text-muted);">We'll respond within one business day.</p>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="card" style="background:var(--color-bg-alt); border:none;">
+        <h3>Reach us directly</h3>
+        <p style="margin-top:1rem;"><strong>Email</strong><br>
+        <a href="mailto:info@uzaziwellnesscare.com" style="color:var(--color-accent-700); font-weight:500;">info@uzaziwellnesscare.com</a></p>
+        <p><strong>Response time</strong><br>Within one business day.</p>
+        <p><strong>Care delivery</strong><br>All services are delivered in the comfort of your home — we come to you.</p>
+      </div>
+      <div class="card mt-2">
+        <h4>What happens next</h4>
+        <ol style="padding-left:1.25rem; color:var(--color-text-muted);">
+          <li style="padding:0.4rem 0;">We respond within one business day.</li>
+          <li style="padding:0.4rem 0;">We schedule a free 30-minute consultation.</li>
+          <li style="padding:0.4rem 0;">We listen, recommend, and let you decide.</li>
+        </ol>
+      </div>
+      <div class="card mt-2" style="background:var(--bg-alt); border:none;">
+        <h4 style="display:flex; align-items:center; gap:0.55rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Where we serve
+        </h4>
+        <p style="margin-top:0.6rem;">We provide in-home care across Kenya — Nairobi, Mombasa, Kisumu, Eldoret, Nakuru, Naivasha, Thika, Karen, Kiambu, and surrounding areas. Not sure if we cover yours? Just ask.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="footer-brand"><img src="../assets/logo-full-light.png" alt="Uzazi Wellness Care" class="footer-logo" /></a>
+        <p class="footer-tag">Gentle, professional support for women through pregnancy, birth, postpartum, and the wider seasons of motherhood — delivered in the comfort of your home.</p>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/uzaziwellnesscare" target="_blank" rel="noopener noreferrer" aria-label="Follow Uzazi Wellness Care on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="https://www.facebook.com/share/1BCBESFna3/" target="_blank" rel="noopener noreferrer" aria-label="Follow Uzazi Wellness Care on Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V5h-3c-1.66 0-3 1.34-3 3v2H8v4h3v8h4v-8h3l1-4h-4V8.5c0-.28.22-.5.5-.5H14V9z" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Care</h5>
+        <ul>
+          <li><a href="../services/index.html">All Services</a></li>
+          <li><a href="../services/prenatal-pregnancy-care/index.html">Prenatal Care</a></li>
+          <li><a href="../services/postnatal-recovery/index.html">Postnatal Recovery</a></li>
+          <li><a href="../services/infant-feeding-lactation/index.html">Infant Feeding</a></li>
+          <li><a href="../services/mental-health/index.html">Mental Health</a></li>
+          <li><a href="../care-packages/index.html">Care Packages</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Community</h5>
+        <ul>
+          <li><a href="../mamas-corner/index.html">Mama's Corner</a></li>
+          <li><a href="../mamas-corner/blog/index.html">Blog &amp; Stories</a></li>
+          <li><a href="../mamas-corner/index.html#groups">Support Groups</a></li>
+          <li><a href="../mamas-corner/index.html#events">Events &amp; Workshops</a></li>
+          <li><a href="../mamas-corner/index.html#newsletter">Newsletter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>About</h5>
+        <ul>
+          <li><a href="../about/index.html">Our Story</a></li>
+          <li><a href="../contact/index.html">Contact</a></li>
+          <li><a href="mailto:info@uzaziwellnesscare.com">info@uzaziwellnesscare.com</a></li>
+          <li><a href="../privacy-policy/index.html">Privacy Policy</a></li>
+          <li><a href="../terms-of-service/index.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>© <span data-year>2026</span> Uzazi Wellness Care. All rights reserved.</span>
+      <span>Made with care for mothers everywhere.</span>
+    </div>
+  </div>
+</footer>
+<script src="../app.js" defer></script>
+</body>
+</html>
