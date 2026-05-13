@@ -155,39 +155,51 @@
 							and what kind of support you're hoping for. No
 							detail too small.
 						</p>
+						<!-- MailerLite-wired contact form. Replace IDs with actual values once MailerLite is approved. -->
 						<form
+							id="contact-form"
 							class="form-grid mt-2"
-							action="mailto:info@uzaziwellnesscare.com"
-							method="post"
-							enctype="text/plain"
-							onsubmit="
-								setTimeout(() => {
-									document.getElementById(
-										'contact-success',
-									).style.display = 'block';
-									this.style.display = 'none';
-								}, 200)
-							"
+							data-ml-form-id="REPLACE_WITH_CONTACT_FORM_ID"
+							data-ml-group-id="REPLACE_WITH_CONTACT_INQUIRIES_GROUP_ID"
+							novalidate
 						>
 							<div class="form-row">
 								<div class="field">
-									<label for="c-name">Your name</label
-									><input id="c-name" type="text" required />
+									<label for="c-first">First name</label
+									><input
+										id="c-first"
+										name="first_name"
+										type="text"
+										autocomplete="given-name"
+										required
+									/>
 								</div>
 								<div class="field">
-									<label for="c-email">Email address</label
+									<label for="c-last">Last name</label
 									><input
-										id="c-email"
-										type="email"
+										id="c-last"
+										name="last_name"
+										type="text"
+										autocomplete="family-name"
 										required
 									/>
 								</div>
 							</div>
 							<div class="field">
+								<label for="c-email">Email address</label
+								><input
+									id="c-email"
+									name="email"
+									type="email"
+									autocomplete="email"
+									required
+								/>
+							</div>
+							<div class="field">
 								<label for="c-stage"
 									>Where are you in your journey?</label
 								>
-								<select id="c-stage">
+								<select id="c-stage" name="stage">
 									<option>Planning to conceive</option>
 									<option>Pregnant — first trimester</option>
 									<option>Pregnant — second trimester</option>
@@ -205,7 +217,7 @@
 								<label for="c-interest"
 									>What are you most interested in?</label
 								>
-								<select id="c-interest">
+								<select id="c-interest" name="interest">
 									<option>A free consultation</option>
 									<option>Prenatal care</option>
 									<option>Birth preparation</option>
@@ -225,11 +237,54 @@
 								>
 								<textarea
 									id="c-msg"
+									name="message"
 									placeholder="Tell us a little more if you'd like..."
 								></textarea>
 							</div>
+							<input
+								type="hidden"
+								name="_subject"
+								value="New contact from uzaziwellnesscare.com"
+							/>
+							<input
+								type="hidden"
+								name="source"
+								value="contact page"
+							/>
+							<input
+								type="text"
+								name="_gotcha"
+								tabindex="-1"
+								autocomplete="off"
+								style="
+									position: absolute;
+									left: -9999px;
+									width: 1px;
+									height: 1px;
+									opacity: 0;
+								"
+								aria-hidden="true"
+							/>
+							<p
+								id="contact-error"
+								style="
+									display: none;
+									background: #fbeee6;
+									border-left: 3px solid #b25538;
+									color: #6e2f1c;
+									padding: 0.75rem 1rem;
+									border-radius: 6px;
+									font-size: 0.9rem;
+									margin: 0;
+								"
+								role="alert"
+							></p>
 							<div>
-								<button type="submit" class="btn btn-primary">
+								<button
+									type="submit"
+									class="btn btn-primary"
+									data-default-label="Send Message"
+								>
 									Send Message
 								</button>
 							</div>
@@ -257,6 +312,89 @@
 								We'll respond within one business day.
 							</p>
 						</div>
+						<script>
+							// MailerLite helper (uzaziMlSubscribe) is defined in /app.js
+							document.addEventListener(
+								"DOMContentLoaded",
+								function () {
+									var f =
+										document.getElementById("contact-form");
+									if (!f) return;
+									var ok =
+										document.getElementById(
+											"contact-success",
+										);
+									var err =
+										document.getElementById(
+											"contact-error",
+										);
+									var b = f.querySelector(
+										'button[type="submit"]',
+									);
+									var label =
+										b ?
+											b.getAttribute("data-default-label")
+										:	"";
+									function showErr(m) {
+										if (err) {
+											err.textContent = m;
+											err.style.display = "block";
+										}
+									}
+									function hideErr() {
+										if (err) err.style.display = "none";
+									}
+									f.addEventListener("submit", function (e) {
+										e.preventDefault();
+										hideErr();
+										var email = (
+											(f.querySelector("#c-email") || {})
+												.value || ""
+										).trim();
+										var first = (
+											(f.querySelector("#c-first") || {})
+												.value || ""
+										).trim();
+										var last = (
+											(f.querySelector("#c-last") || {})
+												.value || ""
+										).trim();
+										if (
+											!first ||
+											!last ||
+											!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(
+												email,
+											)
+										) {
+											showErr(
+												"Please enter your first name, last name, and a valid email address.",
+											);
+											return;
+										}
+										if (b) {
+											b.disabled = true;
+											b.textContent = "Sending\u2026";
+										}
+										window
+											.uzaziMlSubscribe(f)
+											.then(function () {
+												f.style.display = "none";
+												if (ok)
+													ok.style.display = "block";
+											})
+											.catch(function () {
+												showErr(
+													"Something went wrong. Please try again or email info@uzaziwellnesscare.com.",
+												);
+												if (b) {
+													b.disabled = false;
+													b.textContent = label;
+												}
+											});
+									});
+								},
+							);
+						</script>
 					</div>
 
 					<div class="reveal">
@@ -269,6 +407,45 @@
 						>
 							<h3>Reach us directly</h3>
 							<p style="margin-top: 1rem">
+								<strong>Phone</strong><br />
+								<a
+									href="tel:+254707820139"
+									style="
+										color: var(--color-accent-700);
+										font-weight: 500;
+									"
+									>+254 707 820 139</a
+								>
+							</p>
+							<p>
+								<strong>WhatsApp</strong><br />
+								<a
+									href="https://wa.me/254707820139?text=Hi%20Uzazi%20Wellness%20Care%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20care%20services."
+									target="_blank"
+									rel="noopener noreferrer"
+									style="
+										color: var(--color-accent-700);
+										font-weight: 500;
+										display: inline-flex;
+										align-items: center;
+										gap: 0.45rem;
+									"
+								>
+									<svg
+										width="16"
+										height="16"
+										viewBox="0 0 24 24"
+										fill="currentColor"
+										aria-hidden="true"
+									>
+										<path
+											d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"
+										/>
+									</svg>
+									Chat with us on WhatsApp
+								</a>
+							</p>
+							<p>
 								<strong>Email</strong><br />
 								<a
 									href="mailto:info@uzaziwellnesscare.com"
@@ -338,10 +515,10 @@
 								Where we serve
 							</h4>
 							<p style="margin-top: 0.6rem">
-								We provide in-home care across Kenya — Nairobi,
-								Mombasa, Kisumu, Eldoret, Nakuru, Naivasha,
-								Thika, Karen, Kiambu, and surrounding areas. Not
-								sure if we cover yours? Just ask.
+								Headquartered in Nairobi, we provide in-home
+								care to families across Kenya. Not sure if we
+								cover your area? Just ask — we'll do our best to
+								come to you.
 							</p>
 						</div>
 					</div>
@@ -480,6 +657,17 @@
 							<li><a href="../about/index.html">Our Story</a></li>
 							<li><a href="../contact/index.html">Contact</a></li>
 							<li>
+								<a href="tel:+254707820139">+254 707 820 139</a>
+							</li>
+							<li>
+								<a
+									href="https://wa.me/254707820139?text=Hi%20Uzazi%20Wellness%20Care%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20care%20services."
+									target="_blank"
+									rel="noopener noreferrer"
+									>WhatsApp us</a
+								>
+							</li>
+							<li>
 								<a href="mailto:info@uzaziwellnesscare.com"
 									>info@uzaziwellnesscare.com</a
 								>
@@ -507,5 +695,27 @@
 			</div>
 		</footer>
 		<script src="../app.js" defer></script>
+
+		<!-- Floating WhatsApp chat button -->
+		<a
+			href="https://wa.me/254707820139?text=Hi%20Uzazi%20Wellness%20Care%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20care%20services."
+			target="_blank"
+			rel="noopener noreferrer"
+			class="whatsapp-fab"
+			aria-label="Chat with us on WhatsApp"
+		>
+			<span class="whatsapp-fab-tooltip">Chat with us</span>
+			<svg
+				viewBox="0 0 24 24"
+				width="28"
+				height="28"
+				fill="currentColor"
+				aria-hidden="true"
+			>
+				<path
+					d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.478 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.077 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.002-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"
+				/>
+			</svg>
+		</a>
 	</body>
 </html>
