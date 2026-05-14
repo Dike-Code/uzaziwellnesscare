@@ -267,8 +267,8 @@
 						<form
 							id="contact-form"
 							class="form-grid mt-2"
-							data-ml-form-id="REPLACE_WITH_CONTACT_FORM_ID"
-							data-ml-group-id="REPLACE_WITH_CONTACT_INQUIRIES_GROUP_ID"
+							action="https://formspree.io/f/xpqbnalp"
+							method="POST"
 							novalidate
 						>
 							<div class="form-row">
@@ -421,13 +421,14 @@
 							</p>
 						</div>
 						<script>
-							// MailerLite helper (uzaziMlSubscribe) is defined in /app.js
 							document.addEventListener(
 								"DOMContentLoaded",
 								function () {
 									var f =
 										document.getElementById("contact-form");
+
 									if (!f) return;
+
 									var ok =
 										document.getElementById(
 											"contact-success",
@@ -436,37 +437,51 @@
 										document.getElementById(
 											"contact-error",
 										);
+
 									var b = f.querySelector(
 										'button[type="submit"]',
 									);
+
 									var label =
 										b ?
-											b.getAttribute("data-default-label")
+											b.getAttribute(
+												"data-default-label",
+											) || b.textContent
 										:	"";
-									function showErr(m) {
+
+									function showErr(message) {
+										if (!err) return;
+
+										err.textContent = message;
+										err.style.display = "block";
+									}
+
+									function hideErr() {
 										if (err) {
-											err.textContent = m;
-											err.style.display = "block";
+											err.style.display = "none";
 										}
 									}
-									function hideErr() {
-										if (err) err.style.display = "none";
-									}
+
 									f.addEventListener("submit", function (e) {
 										e.preventDefault();
+
 										hideErr();
-										var email = (
-											(f.querySelector("#c-email") || {})
-												.value || ""
-										).trim();
+
 										var first = (
 											(f.querySelector("#c-first") || {})
 												.value || ""
 										).trim();
+
 										var last = (
 											(f.querySelector("#c-last") || {})
 												.value || ""
 										).trim();
+
+										var email = (
+											(f.querySelector("#c-email") || {})
+												.value || ""
+										).trim();
+
 										if (
 											!first ||
 											!last ||
@@ -479,21 +494,38 @@
 											);
 											return;
 										}
+
 										if (b) {
 											b.disabled = true;
-											b.textContent = "Sending\u2026";
+											b.textContent = "Sending...";
 										}
-										window
-											.uzaziMlSubscribe(f)
-											.then(function () {
+
+										fetch(f.action, {
+											method: "POST",
+											body: new FormData(f),
+											headers: {
+												Accept: "application/json",
+											},
+										})
+											.then(function (response) {
+												if (!response.ok) {
+													throw new Error();
+												}
+
 												f.style.display = "none";
-												if (ok)
+
+												if (ok) {
 													ok.style.display = "block";
+												}
 											})
+
 											.catch(function () {
 												showErr(
 													"Something went wrong. Please try again or email info@uzaziwellnesscare.com.",
 												);
+											})
+
+											.finally(function () {
 												if (b) {
 													b.disabled = false;
 													b.textContent = label;
