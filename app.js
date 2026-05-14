@@ -77,7 +77,7 @@
 // Find your account ID: MailerLite Dashboard -> Forms -> Embed code
 // URL looks like https://assets.mailerlite.com/jsonp/{ACCOUNT_ID}/...
 // =====================================================================
-window.UZAZI_ML_ACCOUNT_ID = window.UZAZI_ML_ACCOUNT_ID || "2342537";
+window.UZAZI_ML_ACCOUNT_ID = window.UZAZI_ML_ACCOUNT_ID || "2342537"; // --- IGNORE ---
 
 window.uzaziMlSubscribe = function (form) {
 	var accountId = window.UZAZI_ML_ACCOUNT_ID;
