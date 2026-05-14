@@ -84,7 +84,7 @@ window.uzaziMlSubscribe = function (form) {
 	var formId = form.getAttribute("data-ml-form-id");
 	var groupId = form.getAttribute("data-ml-group-id");
 	var endpoint =
-		"https://assets.mailerlite.com/js/universal.js" +
+		"https://assets.mailerlite.com/jsonp/" +
 		accountId +
 		"/forms/" +
 		formId +
