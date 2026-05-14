@@ -1172,11 +1172,34 @@
 					f.addEventListener("submit", function (e) {
 						e.preventDefault();
 
+						var first = (
+							(f.querySelector("#nl-first") || {}).value || ""
+						).trim();
+
+						var last = (
+							(f.querySelector("#nl-last") || {}).value || ""
+						).trim();
+
+						var email = (
+							(f.querySelector("#nl-email") || {}).value || ""
+						).trim();
+
+						if (
+							!first ||
+							!last ||
+							!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)
+						) {
+							setMsg(
+								"Please enter your first name, last name, and a valid email.",
+								"#b25538",
+							);
+							return;
+						}
+
 						if (b) {
 							b.disabled = true;
 							b.textContent = "Subscribing...";
 						}
-
 						fetch(f.action, {
 							method: "POST",
 							body: new FormData(f),
